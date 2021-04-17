@@ -1,0 +1,25 @@
+{
+    "name": "devsfort/backup",
+    "description": "Package to take Laravel Source and DB backup periodically",
+    "authors": [
+        {
+            "name": "DevsDort",
+            "email": "devsfort748@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+    },
+    "autoload": {
+        "psr-4": {
+            "DevsFort\\Backup\\":"src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers":[
+                "DevsFort\\Backup\\DevsFortServiceProvider"
+            ]
+        }
+    }
+}
